@@ -1,20 +1,28 @@
 # npm-exercise-3
 
-This exercise is about using expression parser that will get an argument and will be an infix expression and the program convert into postfix using my expression-parser.
+This exercise is about using the \@estilles/expression parser that will get a single infix expression argument which the program converts into postfix.
 
 ## How to run the Program
 
 ```javascript
-const { parse, toString, toArray } = require('@estilles/expression-parser');
+const [{ parse, toString, toArray }, {argv}] = [require('@estilles/expression-parser'), require('node:process')];
+
+const [,,args] = process.argv;
+
+if(args == 1){
+  console.log(args)
+  console.log('Only one argument is allowed');
+  process.exit();
+}
 
 const expressionParser = (args) => {
-  //return toString and toArray Expression
   let string  = toString(parse(args));
   let array = toArray(parse(args));
 
-  //uses object to return both Expression Parser
   return {string, array};
 }
-// Edit the 'Argument here' and to run the program to get the 'Postfix' result.
-console.log(expressionParser('Argument Here'));
+
+console.log(expressionParser(args));
 ```
+To run the program you need to be in the console. Then type the command 'node index.js "<argument>"'.
+#### Note: You need to have Node installed and make sure that your argument is inclose to "" for the program to recognize it as one argument and only one argument will work.
